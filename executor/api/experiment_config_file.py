@@ -16,4 +16,4 @@ def config_file(
     meta: FileUploadMeta = None,
     file: UploadFile = File(...)
 ):
-    return {"status": "ok", "file_received": filename}
+    return {}

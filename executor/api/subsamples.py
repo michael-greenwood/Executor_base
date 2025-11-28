@@ -21,7 +21,7 @@ class SubsamplesRequest(BaseModel):
 
 @router.get("/experiment/{experiment_uuid}/sample/{sample_index}/subsamples")
 def get_subsamples(experiment_uuid: str, sample_index: int):
-    # Stub: return empty lists
+    
     return {
         "self_indices": [],
         "other_indices": []
@@ -34,7 +34,4 @@ def post_subsamples(
     sample_index: int,
     payload: SubsamplesRequest
 ):
-    # Stub: accept request, return dummy assigned indices
-    return {
-        "assigned": [info.index for info in payload.self_indices]
-    }
+    return [info.index for info in payload.self_indices]

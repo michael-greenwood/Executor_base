@@ -1,13 +1,13 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import RootModel
 from typing import Dict
 
 router = APIRouter(prefix="/remote_ctrl/sim", tags=["experiment-config"])
 
-class ConfigInputs(BaseModel):
-    __root__: Dict[str, float]   # accept arbitrary fields
+class ConfigInputs(RootModel[Dict[str, float]]):
+    pass
 
 
 @router.post("/experiment/{experiment_uuid}/config/{module_name}")
 def config_inputs(experiment_uuid: str, module_name: str, payload: ConfigInputs):
-    return {"status": "ok"}
+    return {}

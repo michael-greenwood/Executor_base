@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
 from uuid import UUID
+from core.runtime import EXPERIMENTS  
 
 router = APIRouter(prefix="/remote_ctrl/sim", tags=["experiment-new"])
 
@@ -15,8 +16,8 @@ class NewExperimentRequest(BaseModel):
 
 @router.post("/experiment/new")
 def experiment_new(payload: NewExperimentRequest):
-    # We accept the fields but ignore them (hello world)
+    EXPERIMENTS[str(payload.experiment_uuid)] = {"status": "Q"}   
+
     return {
-        "status": "ok",
         "id": str(payload.experiment_uuid)
     }
