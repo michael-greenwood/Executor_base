@@ -2,7 +2,7 @@ from enum import Enum
 
 
 # ============================================================
-# Experiment Status  (same as module status table you gave)
+# Experiment Status  
 # ============================================================
 
 class ExperimentStatus(str, Enum):
@@ -25,7 +25,7 @@ EXPERIMENT_STATUS_LONG = {
 
 
 # ============================================================
-# Module Status  (same table as experiment status)
+# Module Status  
 # ============================================================
 
 class ModuleStatus(str, Enum):
@@ -41,7 +41,7 @@ MODULE_STATUS_LONG = EXPERIMENT_STATUS_LONG.copy()
 
 
 # ============================================================
-# Process Status (separate table)
+# Process Status 
 # ============================================================
 
 class ProcessStatus(str, Enum):
@@ -66,7 +66,7 @@ PROCESS_STATUS_LONG = {
 
 
 # ============================================================
-# Sample Status (you gave this separately)
+# Sample Status 
 # ============================================================
 
 class SampleStatus(str, Enum):
@@ -86,37 +86,4 @@ SAMPLE_STATUS_LONG = {
 }
 
 
-# ============================================================
-# Validation Helpers
-# ============================================================
 
-def validate_experiment_status(value: str) -> bool:
-    return value in ExperimentStatus._value2member_map_
-
-
-def validate_module_status(value: str) -> bool:
-    return value in ModuleStatus._value2member_map_
-
-
-def validate_process_status(value: str) -> bool:
-    return value in ProcessStatus._value2member_map_
-
-
-def validate_sample_status(value: str) -> bool:
-    return value in SampleStatus._value2member_map_
-
-
-def long_name_experiment(value: str) -> str:
-    return EXPERIMENT_STATUS_LONG.get(value, "Unknown")
-
-
-def long_name_module(value: str) -> str:
-    return MODULE_STATUS_LONG.get(value, "Unknown")
-
-
-def long_name_process(value: str) -> str:
-    return PROCESS_STATUS_LONG.get(value, "Unknown")
-
-
-def long_name_sample(value: str) -> str:
-    return SAMPLE_STATUS_LONG.get(value, "Unknown")
