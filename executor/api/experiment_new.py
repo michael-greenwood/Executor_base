@@ -14,10 +14,11 @@ class NewExperimentRequest(BaseModel):
     base_index: Optional[int] = None
 
 
-@router.post("/experiment/new")
+@router.post("/experiment/new", status_code=201)
 def experiment_new(payload: NewExperimentRequest):
-    EXPERIMENTS[str(payload.experiment_uuid)] = {"status": "Q",
-        "modules": {m: {"status": "Q"} for m in MODULES} } 
+    EXPERIMENTS[str(payload.experiment_uuid)] = {"status": "P",
+        "modules": {m: {"status": "P"} for m in MODULES},
+         "config": {} } 
 
     return {
         "id": str(payload.experiment_uuid)

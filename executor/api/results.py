@@ -1,7 +1,7 @@
+from core.runtime import EXPERIMENTS
 from fastapi import APIRouter
 
 router = APIRouter(prefix="/remote_ctrl/sim", tags=["results"])
-
 
 @router.get("/experiment/{experiment_uuid}/results")
 def all_results(experiment_uuid: str):
@@ -10,7 +10,9 @@ def all_results(experiment_uuid: str):
 
 @router.get("/experiment/{experiment_uuid}/results/{module_name}")
 def module_results(experiment_uuid: str, module_name: str):
-    return {}
+    exp = EXPERIMENTS.get(experiment_uuid, {})
+    module = exp.get("modules", {}).get(module_name, {})
+    return module.get("output", {})
 
 
 @router.get("/experiment/{experiment_uuid}/sample/{sample_index}/results/{module_name}")

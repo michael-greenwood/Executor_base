@@ -1,3 +1,4 @@
+from logging import config
 import threading
 import time
 
@@ -20,6 +21,7 @@ def simulate_experiment(exp_uuid: str):
         for m in exp["modules"]:
             exp["modules"][m]["status"] = "R"
             print("RUNNING", m)
+            run(exp,m)
             time.sleep(3)
             exp["modules"][m]["status"] = "C"
             print("COMPLETED", m)
@@ -31,7 +33,12 @@ def simulate_experiment(exp_uuid: str):
         print("SIM ERROR:", e)
 
 
-
+def run(exp,m):
+    config = exp["config"].get(m, {})
+    if "x" in config:
+            exp["modules"][m]["output"] = {"x_plus_one": config["x"] + 1}
+    else:
+        exp["modules"][m]["output"] = {"x_plus_one": None}
 
 def start_experiment(exp_uuid: str):
     t = threading.Thread(target=simulate_experiment, args=(exp_uuid,))
